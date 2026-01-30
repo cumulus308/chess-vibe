@@ -1,11 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "crons": [
-    {
-      "path": "/api/warmup",
-      "schedule": "*/5 * * * *"
-    }
-  ]
+  "framework": "vite"
 }

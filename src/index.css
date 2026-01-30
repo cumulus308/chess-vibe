@@ -1,0 +1,59 @@
+/* SF Arcade theme – global */
+:root {
+  --bg-deep: #0a0e17;
+  --bg-panel: #0f1629;
+  --bg-card: #141c2e;
+  --neon-cyan: #00f5ff;
+  --neon-magenta: #ff00aa;
+  --neon-green: #39ff14;
+  --glow-cyan: 0 0 10px #00f5ff, 0 0 20px rgba(0, 245, 255, 0.4);
+  --glow-magenta: 0 0 10px #ff00aa, 0 0 20px rgba(255, 0, 170, 0.4);
+  --glow-green: 0 0 10px #39ff14, 0 0 20px rgba(57, 255, 20, 0.3);
+  --text-primary: #e0e8f5;
+  --text-dim: #7a8ba3;
+  --border-subtle: rgba(0, 245, 255, 0.2);
+  font-family: 'Share Tech Mono', 'Consolas', monospace;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 245, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 170, 0.04) 0%, transparent 40%),
+    var(--bg-deep);
+}
+
+#root {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Scanline overlay (optional subtle effect) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  z-index: 9999;
+}

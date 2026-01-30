@@ -1,0 +1,298 @@
+/* SF Arcade – app layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.15em;
+  margin: 0;
+  color: var(--text-primary);
+  text-shadow: var(--glow-cyan);
+}
+
+/* Game status – arcade display */
+.game-status {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  margin: 0;
+  padding: 0.35rem 0.6rem;
+  color: var(--neon-cyan);
+  background: rgba(0, 245, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.2);
+}
+
+/* Board – holographic grid */
+.board {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 4px;
+  box-shadow:
+    var(--glow-cyan),
+    inset 0 0 30px rgba(0, 245, 255, 0.05);
+  overflow: hidden;
+}
+
+.board-row {
+  display: flex;
+}
+
+.board .square {
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.square-light {
+  background: linear-gradient(145deg, #1e2a3d 0%, #141c2e 100%);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.08);
+  border-right: 1px solid rgba(0, 245, 255, 0.08);
+}
+
+.square-dark {
+  background: linear-gradient(145deg, #0d1220 0%, #060a10 100%);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.04);
+  border-right: 1px solid rgba(0, 245, 255, 0.04);
+}
+
+.board .square:hover {
+  background: linear-gradient(145deg, #1e2a3d 0%, #141c2e 100%);
+  box-shadow: inset 0 0 12px rgba(0, 245, 255, 0.08);
+}
+
+.square-selected {
+  background: linear-gradient(145deg, rgba(0, 245, 255, 0.25) 0%, rgba(0, 245, 255, 0.12) 100%) !important;
+  box-shadow: inset 0 0 16px rgba(0, 245, 255, 0.3) !important;
+  border: 1px solid var(--neon-cyan) !important;
+}
+
+.square-legal {
+  position: relative;
+}
+
+.square-legal::after {
+  content: '';
+  position: absolute;
+  width: 36%;
+  height: 36%;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  opacity: 0.9;
+}
+
+.square-legal.square-dark::after {
+  background: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Pieces – neon glow */
+.piece {
+  font-size: 36px;
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.piece[data-color="white"] {
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.piece[data-color="black"] {
+  color: var(--neon-magenta);
+  text-shadow: var(--glow-magenta);
+}
+
+/* Arcade buttons */
+.app button,
+.mode-select-buttons button,
+.online-lobby button,
+.online-actions button {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 1rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--neon-cyan);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  text-transform: uppercase;
+}
+
+.app button:hover,
+.mode-select-buttons button:hover,
+.online-lobby button:hover,
+.online-actions button:hover {
+  box-shadow: var(--glow-cyan);
+  background: rgba(0, 245, 255, 0.1);
+  color: var(--neon-cyan);
+}
+
+.app button:disabled,
+.online-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.app button.new-game {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.app button.new-game:hover {
+  box-shadow: var(--glow-green);
+  background: rgba(57, 255, 20, 0.1);
+}
+
+.app button.resign {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+}
+
+.app button.resign:hover:not(:disabled) {
+  box-shadow: var(--glow-magenta);
+  background: rgba(255, 0, 170, 0.1);
+}
+
+.back-to-menu,
+.lobby-back {
+  border-color: var(--text-dim);
+  color: var(--text-dim);
+}
+
+.back-to-menu:hover,
+.lobby-back:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  box-shadow: 0 0 10px rgba(224, 232, 245, 0.3);
+}
+
+/* Mode select – arcade menu */
+.mode-select {
+  text-align: center;
+  padding: 2rem;
+}
+
+.mode-select p {
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.mode-select-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 320px;
+  margin: 1rem auto;
+}
+
+.mode-select-buttons button {
+  padding: 0.9rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+/* Online lobby */
+.online-lobby h1,
+.app h1 {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.12em;
+}
+
+.online-lobby form,
+.online-lobby .lobby-waiting {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(15, 22, 41, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+}
+
+.online-lobby label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.online-lobby input {
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+}
+
+.online-lobby input:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.2);
+}
+
+.lobby-status {
+  margin: 0.5rem 0;
+  color: var(--neon-cyan);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.lobby-waiting strong {
+  color: var(--neon-green);
+  letter-spacing: 0.1em;
+}
+
+.lobby-error,
+.online-error {
+  color: #ff4466;
+  margin: 0.5rem 0;
+  font-family: 'Share Tech Mono', monospace;
+  text-shadow: 0 0 8px rgba(255, 68, 102, 0.5);
+}
+
+.online-meta {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.03em;
+}
+
+.online-meta strong {
+  color: var(--neon-cyan);
+}
+
+.online-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.new-game {
+  font-weight: 600;
+}

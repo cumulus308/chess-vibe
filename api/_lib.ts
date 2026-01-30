@@ -4,6 +4,8 @@
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { VercelResponse } from '@vercel/node';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   createNewGame,
   applyMove,
@@ -11,7 +13,7 @@ import {
   getGameState,
   updateCastlingRights,
   getPiece,
-} from '../src/domain/chess';
+} from '../src/domain/chess/index.js';
 import type {
   Board,
   CastlingRights,
@@ -19,13 +21,35 @@ import type {
   GamePhase,
   Move,
   Square,
-} from '../src/domain/chess';
+} from '../src/domain/chess/index.js';
+
+/** Load .env.local from project root when vars are missing (vercel dev does not inject it). */
+function loadEnvLocalOnce(): void {
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) return;
+  const envPath = join(process.cwd(), '.env.local');
+  if (!existsSync(envPath)) return;
+  try {
+    const content = readFileSync(envPath, 'utf-8');
+    for (const line of content.split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eq = trimmed.indexOf('=');
+      if (eq <= 0) continue;
+      const key = trimmed.slice(0, eq).trim();
+      const value = trimmed.slice(eq + 1).trim();
+      if (!process.env[key]) process.env[key] = value;
+    }
+  } catch {
+    // ignore
+  }
+}
 
 // --- Supabase ---
 let _client: SupabaseClient | null = null;
 
 export function getSupabase(): SupabaseClient {
   if (!_client) {
+    loadEnvLocalOnce();
     const url = process.env.SUPABASE_URL;
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
     if (!url || !key) throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');

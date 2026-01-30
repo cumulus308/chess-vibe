@@ -66,6 +66,12 @@ Online mode runs entirely on **Vercel + Supabase** (no separate WebSocket server
 
 Online 1vs1 uses **REST API + polling** (no WebSockets). Updates appear within about 1–2 seconds.
 
+### Making the move API faster
+
+- **Region**: In Vercel → Project → Settings → General, set **Region** to the same (or nearest) as your Supabase project (e.g. both in `ap-northeast-2` or `us-east-1`) to reduce network latency.
+- **Warmup**: A cron job is configured to call `GET /api/warmup` every 5 minutes so the serverless runtime stays warm and cold starts are less frequent. It only runs on **production** deployments.
+- **Cold start**: The first request after a long idle period can take 1–3 seconds; subsequent requests are usually much faster.
+
 ## Tech stack
 
 - React, TypeScript, Vite

@@ -5,8 +5,8 @@ import type {
   Move,
   Piece,
   Square,
-} from './types';
-import { FILES, RANKS } from './types';
+} from './types.js';
+import { FILES, RANKS } from './types.js';
 
 export function getInitialBoard(): Board {
   const board: Board = RANKS.map(() => FILES.map(() => null));

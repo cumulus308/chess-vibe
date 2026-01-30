@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getSupabase, type RoomState, roomStateToWire, json, err } from '../../_lib';
+import { getSupabase, type RoomState, roomStateToWire, json, err } from '../../_lib.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {

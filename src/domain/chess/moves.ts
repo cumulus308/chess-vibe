@@ -1,4 +1,4 @@
-import { applyMove, getKingSquare, getPiece } from './board';
+import { applyMove, getKingSquare, getPiece } from './board.js';
 import type {
   Board,
   CastlingRights,
@@ -6,8 +6,8 @@ import type {
   Move,
   Piece,
   Square,
-} from './types';
-import { FILES, isFile, isRank, RANKS, squareEquals } from './types';
+} from './types.js';
+import { FILES, isFile, isRank, RANKS, squareEquals } from './types.js';
 
 export interface MoveContext {
   lastMove?: Move;

@@ -9,7 +9,7 @@ import {
   generatePlayerId,
   json,
   err,
-} from '../_lib';
+} from '../_lib.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {

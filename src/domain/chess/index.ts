@@ -1,23 +1,23 @@
-export * from './types';
+export * from './types.js';
 export {
   applyMove,
   getInitialBoard,
   getKingSquare,
   getPiece,
   updateCastlingRights,
-} from './board';
+} from './board.js';
 export {
   getAllLegalMoves,
   getLegalMoves,
   isSquareAttacked,
   type MoveContext,
-} from './moves';
-export { getGameState } from './gameState';
+} from './moves.js';
+export { getGameState } from './gameState.js';
 
-import { getInitialBoard } from './board';
-import { getGameState } from './gameState';
-import type { Board, CastlingRights, Color, GamePhase, Move } from './types';
-import { getInitialCastlingRights } from './types';
+import { getInitialBoard } from './board.js';
+import { getGameState } from './gameState.js';
+import type { Board, CastlingRights, Color, GamePhase, Move } from './types.js';
+import { getInitialCastlingRights } from './types.js';
 
 export function createNewGame(): {
   board: Board;

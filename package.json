@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
-    "@vercel/node": "^3.2.30",
+    "@vercel/node": "^2.0.0",
     "@eslint/js": "^9.39.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",

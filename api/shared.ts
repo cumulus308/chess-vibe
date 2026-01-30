@@ -3,7 +3,7 @@
  */
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import type { VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
@@ -202,4 +202,9 @@ export function parseMovePayload(
 
 export function gameOver(state: RoomGameState): boolean {
   return !!state.gamePhase.checkmate || !!state.gamePhase.stalemate || state.resigned != null;
+}
+
+/** Not a route: shared module only. Return 404 if invoked as /api/shared. */
+export default function handler(_req: VercelRequest, res: VercelResponse): void {
+  res.status(404).end();
 }

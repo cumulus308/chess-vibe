@@ -1,8 +1,13 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getSupabase, type RoomState, type RoomPlayer } from '../../lib/supabase';
-import { roomStateToWire } from '../../lib/game';
-import { generatePlayerId } from '../../lib/ids';
-import { json, err } from '../../lib/res';
+import {
+  getSupabase,
+  type RoomState,
+  type RoomPlayer,
+  roomStateToWire,
+  generatePlayerId,
+  json,
+  err,
+} from '../../_lib';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {

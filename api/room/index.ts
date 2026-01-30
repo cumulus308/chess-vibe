@@ -1,8 +1,15 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getSupabase, type RoomState, type RoomPlayer } from '../lib/supabase';
-import { createRoomGameState, roomStateToWire } from '../lib/game';
-import { generateRoomId, generatePlayerId } from '../lib/ids';
-import { json, err } from '../lib/res';
+import {
+  getSupabase,
+  type RoomState,
+  type RoomPlayer,
+  createRoomGameState,
+  roomStateToWire,
+  generateRoomId,
+  generatePlayerId,
+  json,
+  err,
+} from '../_lib';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -33,7 +40,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (error.code === '23505') {
         return handler(req, res);
       }
-      console.error('Supabase insert room:', error);
+      console.error('[api/room] Supabase insert:', error.message, error.code, error.details);
       return err(res, 'Failed to create room', 500);
     }
 
@@ -44,7 +51,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       gameState: roomStateToWire(gameState),
     });
   } catch (e) {
-    console.error('create room', e);
-    return err(res, e instanceof Error ? e.message : 'Server error', 500);
+    const message = e instanceof Error ? e.message : 'Server error';
+    console.error('[api/room] create room:', message, e);
+    return err(res, message, 500);
   }
 }
